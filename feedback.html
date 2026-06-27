@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance - Feedback</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            min-height: 100vh;
+            padding-bottom: 120px;
+        }
+        .header {
+            background: #111;
+            padding: 20px;
+            border-bottom: 2px solid #f3ba2f;
+            text-align: center;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f3ba2f;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #f3ba2f;
+            text-align: center;
+        }
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .ad-card {
+            background: #111;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f3ba2f;
+            text-align: center;
+        }
+        .ad-card h3 {
+            color: #f3ba2f;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .ad-card p {
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .ad-card button {
+            padding: 10px 20px;
+            background: #f3ba2f;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .ad-card button:hover {
+            background: #e0a800;
+        }
+        .footer-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111;
+            border-top: 2px solid #f3ba2f;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+        .footer-menu a {
+            color: #f3ba2f;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .footer-menu a:hover {
+            background: #222;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-text">⭐ Feedback</div>
+    </div>
+
+    <div class="container">
+        <h1>Your Feedback & Ads</h1>
+        
+        <div class="ads-grid">
+            <div class="ad-card">
+                <h3>💰 Earn Rewards</h3>
+                <p>Earn up to 10% rewards on your crypto holdings. Join our rewards program today!</p>
+                <button onclick="alert('Visit rewards program')">Learn More</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>🚀 Low Trading Fees</h3>
+                <p>Trade with the lowest fees in the industry. Start trading now and save big!</p>
+                <button onclick="alert('Start trading')">Get Started</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>🔒 Secure Your Assets</h3>
+                <p>Bank-level security for your cryptocurrency. Your funds are always protected.</p>
+                <button onclick="alert('Learn about security')">Learn More</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>📱 Mobile Trading</h3>
+                <p>Trade on the go with our mobile app. Available on iOS and Android.</p>
+                <button onclick="alert('Download app')">Download Now</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>💡 Crypto Education</h3>
+                <p>Learn about blockchain and cryptocurrency with our free educational resources.</p>
+                <button onclick="alert('Start learning')">Explore Academy</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>🎁 Special Offers</h3>
+                <p>Get exclusive bonuses and promotions. Limited time offers available now!</p>
+                <button onclick="alert('View offers')">Claim Offer</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer-menu">
+        <a href="admin.html">Admin Panel</a>
+        <a href="customer-care.html">Customer Care</a>
+        <a href="fill-report.html">Fill Report</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="settings.html">Settings</a>
+    </div>
+</body>
+</html>
