@@ -15,6 +15,7 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             color: white;
             min-height: 100vh;
+            padding-bottom: 120px;
         }
         .header {
             background: #111;
@@ -74,33 +75,65 @@
         .ad-card button:hover {
             background: #e0a800;
         }
-        .button-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
+        .countdown-section {
+            text-align: center;
+            margin: 40px 0;
+            padding: 30px;
+            background: #111;
+            border-radius: 8px;
+            border: 1px solid #f3ba2f;
         }
-        a, button {
-            padding: 12px 30px;
-            background: #f3ba2f;
-            color: #000;
-            text-decoration: none;
+        .countdown-text {
+            font-size: 18px;
+            color: #ccc;
+            margin-bottom: 15px;
+        }
+        .countdown-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: #f3ba2f;
+            margin: 20px 0;
+        }
+        .logout-section {
+            text-align: center;
+            display: none;
+        }
+        .logout-btn {
+            padding: 12px 40px;
+            background: #d32f2f;
+            color: white;
             border: none;
             border-radius: 8px;
             font-weight: bold;
             cursor: pointer;
+            font-size: 16px;
             transition: background 0.3s;
-            font-size: 14px;
-        }
-        a:hover, button:hover {
-            background: #e0a800;
-        }
-        .logout-btn {
-            background: #d32f2f;
-            color: white;
         }
         .logout-btn:hover {
             background: #b71c1c;
+        }
+        .footer-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111;
+            border-top: 2px solid #f3ba2f;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+        .footer-menu a {
+            color: #f3ba2f;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .footer-menu a:hover {
+            background: #222;
         }
     </style>
 </head>
@@ -150,25 +183,52 @@
             </div>
         </div>
 
-        <div class="button-group">
-            <a href="dashboard.html">Back to Dashboard</a>
-            <a href="index.html">Home</a>
+        <div class="countdown-section">
+            <div class="countdown-text">Session will end in:</div>
+            <div class="countdown-number" id="countdown">10</div>
+        </div>
+
+        <div class="logout-section" id="logoutSection">
             <button class="logout-btn" onclick="logout()">Logout</button>
         </div>
+    </div>
+
+    <div class="footer-menu">
+        <a href="admin.html">Admin Panel</a>
+        <a href="customer-care.html">Customer Care</a>
+        <a href="fill-report.html">Fill Report</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="settings.html">Settings</a>
     </div>
 
     <script>
         // Check if user is logged in
         if (!localStorage.getItem('loggedIn')) {
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
+        
+        // Countdown from 10 to 0
+        let count = 10;
+        const countdownDiv = document.getElementById('countdown');
+        const logoutSection = document.getElementById('logoutSection');
+        
+        const interval = setInterval(() => {
+            count--;
+            countdownDiv.textContent = count;
+            
+            if (count === 0) {
+                clearInterval(interval);
+                document.querySelector('.countdown-section').style.display = 'none';
+                logoutSection.style.display = 'block';
+            }
+        }, 1000);
         
         function logout() {
             localStorage.removeItem('loggedIn');
             localStorage.removeItem('username');
             localStorage.removeItem('password');
             localStorage.removeItem('loginTime');
-            window.location.href = 'login.html';
+            window.location.href = 'index.html';
         }
     </script>
 </body>
