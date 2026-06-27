@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Binance - Ads</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #000;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: white;
+            min-height: 100vh;
+        }
+        .header {
+            background: #111;
+            padding: 20px;
+            border-bottom: 2px solid #f3ba2f;
+            text-align: center;
+        }
+        .logo-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #f3ba2f;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 40px auto;
+            padding: 30px;
+        }
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #f3ba2f;
+            text-align: center;
+        }
+        .ads-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+        .ad-card {
+            background: #111;
+            padding: 20px;
+            border-radius: 8px;
+            border: 1px solid #f3ba2f;
+            text-align: center;
+        }
+        .ad-card h3 {
+            color: #f3ba2f;
+            margin-bottom: 15px;
+            font-size: 18px;
+        }
+        .ad-card p {
+            color: #ccc;
+            margin-bottom: 15px;
+            line-height: 1.6;
+        }
+        .ad-card button {
+            padding: 10px 20px;
+            background: #f3ba2f;
+            color: #000;
+            border: none;
+            border-radius: 5px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .ad-card button:hover {
+            background: #e0a800;
+        }
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        a, button {
+            padding: 12px 30px;
+            background: #f3ba2f;
+            color: #000;
+            text-decoration: none;
+            border: none;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+        a:hover, button:hover {
+            background: #e0a800;
+        }
+        .logout-btn {
+            background: #d32f2f;
+            color: white;
+        }
+        .logout-btn:hover {
+            background: #b71c1c;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-text">₿ BINANCE - Featured Ads</div>
+    </div>
+
+    <div class="container">
+        <h1>Latest Promotions & Offers</h1>
+        
+        <div class="ads-grid">
+            <div class="ad-card">
+                <h3>💰 Earn Rewards</h3>
+                <p>Earn up to 10% rewards on your crypto holdings. Join our rewards program today!</p>
+                <button onclick="alert('Visit rewards program')">Learn More</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>🚀 Low Trading Fees</h3>
+                <p>Trade with the lowest fees in the industry. Start trading now and save big!</p>
+                <button onclick="alert('Start trading')">Get Started</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>🔒 Secure Your Assets</h3>
+                <p>Bank-level security for your cryptocurrency. Your funds are always protected.</p>
+                <button onclick="alert('Learn about security')">Learn More</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>📱 Mobile Trading</h3>
+                <p>Trade on the go with our mobile app. Available on iOS and Android.</p>
+                <button onclick="alert('Download app')">Download Now</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>💡 Crypto Education</h3>
+                <p>Learn about blockchain and cryptocurrency with our free educational resources.</p>
+                <button onclick="alert('Start learning')">Explore Academy</button>
+            </div>
+
+            <div class="ad-card">
+                <h3>🎁 Special Offers</h3>
+                <p>Get exclusive bonuses and promotions. Limited time offers available now!</p>
+                <button onclick="alert('View offers')">Claim Offer</button>
+            </div>
+        </div>
+
+        <div class="button-group">
+            <a href="dashboard.html">Back to Dashboard</a>
+            <a href="index.html">Home</a>
+            <button class="logout-btn" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        if (!localStorage.getItem('loggedIn')) {
+            window.location.href = 'login.html';
+        }
+        
+        function logout() {
+            localStorage.removeItem('loggedIn');
+            localStorage.removeItem('username');
+            localStorage.removeItem('password');
+            localStorage.removeItem('loginTime');
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
